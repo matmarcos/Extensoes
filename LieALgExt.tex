@@ -1,0 +1,745 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[brazil]{babel}
+%\usepackage[portuguese]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage[hmargin={2cm},vmargin={2cm}]{geometry}
+\usepackage{graphicx,color}
+
+ 
+\usepackage{ifthen}                            % Caso tenha problemas ao usar UTF-8, experimente \usepackage{ucs}
+\usepackage{calc}
+
+
+\usepackage{amssymb,amsmath}   % simbolos matemáticos providos pela AMS
+\usepackage{amsthm}						 % estilo dos teoremas
+%\usepackage[dvipdfm]{graphicx} % para inclusão de figuras (png, jpg, gif, bmp)
+\usepackage{fancyhdr}					 % personaliza cabeçalho e rodapé
+\usepackage{color}             % para letras e caixas coloridas
+\usepackage{makeidx}           % índice remissivo
+\usepackage{a4wide}            % correta formatação da página em A4
+\usepackage{setspace}          % para a distância entre linhas
+\usepackage[T1]{fontenc}
+%\usepackage{egothic}
+%\usepackage{yfonts}
+\usepackage[all]{xy}
+\usepackage{stackrel}	
+
+\usepackage{geometry}
+
+
+
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\dem}{{\bf Demonstração: }}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\newcommand{\I}{\ensuremath{\mathbb{I}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Rm}{\ensuremath{\R^m}}
+\newcommand{\Rn}{\ensuremath{\R^n}}
+\newcommand{\RN}{\ensuremath{\R^N}}
+\newcommand{\oo}{\ensuremath{\infty}}
+\newcommand{\omg}{\ensuremath{\Omega}}
+\newcommand{\bola}{\circ}
+\newcommand{\vazio}{\emptyset}
+\newcommand{\x}{\mathcal{X}}
+\newcommand{\cqd}{\rule{2mm}{2mm}}
+\newcommand{\prova}{\noindent \textbf{Prova: }}
+
+\renewcommand{\S}{\ensuremath{{\mathcal{S}}}}
+\newcommand{\E}{\ensuremath{{\mathcal{E}}}}
+\newcommand{\D}{\ensuremath{{\mathcal{D}}}}
+\newcommand{\Coo}{\ensuremath{{C}^\oo}}
+\newcommand{\Ck}[1][1]{\ensuremath{{C}^{#1}}}
+\newcommand{\lloc}[1][1]{\ensuremath{L^#1_{\mbox{\emph{\scriptsize{loc}}}}}}
+\renewcommand{\l}[1][1]{\ensuremath{L^{#1}}}
+
+\newcommand{\norma}[2][ ]{\ensuremath{|| #2 ||_{#1}}}
+\newcommand{\seta}{\longrightarrow}
+\newcommand{\leva}{\longmapsto}
+\newcommand{\eps}{\ensuremath{\varepsilon}}
+\DeclareMathOperator{\sen}{sen}         
+\DeclareMathOperator{\senh}{senh} 
+\DeclareMathOperator{\mdc}{mdc} 
+\DeclareMathOperator{\mmc}{mmc} 
+\DeclareMathOperator{\supp}{supp} 
+
+\renewcommand{\d}[1]{\ensuremath{{\rm d} #1 }}
+\newcommand{\intg}[3][ ]{\ensuremath{ \int_{#1} #2 \, \d{#3}}}
+\newcommand{\intx}[2][ ]{\intg[#1]{#2}{x}}
+\newcommand{\intxi}[2][ ]{\intg[#1]{#2}{\xi}}
+\newcommand{\tf}[1]{\ensuremath{\widehat{#1}}}
+%\newcommand{\txt}[1]{\mbox{ #1 }}
+\newcommand{\til}[1]{\widetilde{#1}}
+
+\newtheorem{teo}{Teorema}
+\newtheorem{cor}{Corolário}
+\newtheorem{lem}{Lema}
+\newtheorem{obs}{Observação}
+\newtheorem{df}{Definição}
+\newtheorem{af}{Afirmação}
+\newtheorem{ex}{Exemplo}
+\newtheorem{prop}{Proposição}
+
+\newtheorem{definition}{Definição}
+\let\olddefinition\definition
+\renewcommand{\df}{\olddefinition\normalfont}
+
+%\theoremstyle{remark}
+\theoremstyle{definition}
+
+
+
+
+
+\begin{document}
+\title{Extensões de Álgebras de Lie}
+
+\section{Extensões de Álgebras de Lie}
+\subsection{Definição}
+Nessa seção definiremos extensões de álgebras de Lie e alguns grupos de cohomologia.
+\begin{df} Sejam $K$,$H$ e $L$ álgebras de Lie. $L$ é dita uma extensão de $K$ por $H$ se existe uma sequência exata de álgebras de Lie,
+$$0 \to H \stackrel{ i}{\to} L \stackrel{ s}{\to} K \to 0.$$
+\end{df} 
+
+Seja $S$ um subespaço vetorial de $L$ tal que $L=S \oplus Ker(s),$
+\begin{itemize}
+\item se $S$ é um ideal então é uma extensão \textbf{trivial} de $K$;
+\item se $S$ é uma subálgebra de $L$ então a extensão é dita \textbf{split};
+\item se $Ker(s)$ está contido no centro de $L$, denotado por $Z(L)$, então $L$ é uma extensão \textbf{central}.
+\end{itemize} 
+
+\subsection{Extensões Usando Cohomologia}
+
+\begin{df}Sejam $K$ e $I$ álgebras de Lie. Diremos que $K$ age sobre $I$ se existe um morfismo de álgebras de Lie $\psi:K \to Der(I)$. Neste caso, denotaremos a ação de $K$ sobre $I$ por $$[a,k]:=\psi(k)(a), k \in K,a \in I.$$
+\end{df}
+
+A ação de $K$ sobre $I$ pode ser vista como uma representação de $K$ em $I$, assim $I$ possui estrutura de $K$-módulo, o que nos permite definir os grupos de cohomologia de $K$ em $I$
+
+
+\begin{df} Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. 
+\begin{itemize}
+
+\item Denote por $C^2(K,I)$ o espaço das aplicações bilineares e antisimétricas de $K$ em $I$.
+\item Se $\theta \in C^2(K,I)$ é tal que $ \theta(x,[y,z])+\theta(y,[z,x])+\theta(z,[x,y])=[\theta(y,z),x]+[\theta(z,x),y]+[\theta(x,y),z], x,y,z \in K,$
+então $\theta$ será chamado de \textbf{cociclo} e o espaço dos cocilos será denotado por $Z^2(K,I)$, que é o segundo grupo de cohomologia.
+
+\item Suponha que $\theta$ é um cociclo. Se para todo $k,h \in K$ podemos escrever $\theta(k,h)=\nu([h,k])+[\nu(h),k]-[\nu(k),h]$, para alguma aplicação linear $\nu:K \to I$ então $\theta$ será chamado de \textbf{cofronteira}. O espaço das cofronteiras será denotado por $B^2(K,I)$. 
+\item Denote $H^2(K,I)=Z^2(K,I)/B^2(K,I)$ o espaço quociente dos cociclos pelas cofronteiras. 
+\item O primeiro grupo de cohomologia de $K$ e $I$ é definido por $Z^1(K,I)=\{\nu \in Hom(K,I) \mid \nu([k,h]_K)=[\nu(k),h]-[\nu(h),k], \mbox{ para todo } k,h \in K\}$.
+\end{itemize}
+\end{df}
+
+Para cada cociclo em $Z^2(K,I)$ podemos definir uma extensão split de $K$ por I. Se $L$ é uma álgebra de Lie com um ideal abeliano não-trivial $I$, então $L$ pode ser vista como uma extensão split de $K=L/I$ por $I$. Através dessa caracterização poderemos calcular as derivações e automorfismos de $L$ a partir de $K$.
+
+\begin{prop}  Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. Seja $\theta \in Z^2(K,I)$ e defina a álgebra $K_{\theta}=K \oplus I$ com o produto  \begin{equation}
+ [x+a,y+b]_{\theta}=[x,y]_K+\theta(x,y)+[a,y]-[b,x], \mbox{ para } x,y \in K \mbox{ e } a,b \in I.
+ \end{equation}
+ Então,
+ \begin{enumerate}
+ \item $K_\theta$ é uma álgebra de Lie;
+\item $K_{\theta}$ é uma extensão de $K$ por $I$.  
+ \item  Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$ com $I$ abeliano. Suponha que $K=L/I$ age sobre $I$. Então existe $\theta \in Z^2(K,I)$ tal que $L \cong K_\theta$. 
+\end{enumerate}    
+\end{prop}
+\prova 1) Sejam  $x,y,z\in K$ e $a,b,c \in I$ então:
+
+\begin{itemize}
+\item Se $x \in K$ e $a \in I$ então $[x+a,x+a]=[x,x]_K+\theta(x,x)+[a,x]-[a,x]=0$;
+ \item Sejam $x,y,z \in K$ e $a,b,c \in I$. Usando a definição do produto em $K_\theta$ obtemos 
+  $$[x+a,[y+b,z+c]]=[x,[y,z]_K]_K+ \theta(x,[y,z])-[\theta(y,z),x]+[a,[y,z]_K]-[[b,z],x]+[[c,y],x].$$ 
+  
+%  Como a ação de $K$ em $I$ é dada por uma representação então 
+%   $$[[b,z],x]=[b,[z,x]_K]+[[b,x],z]] \mbox{ e } [[c,y],x]=[c,[y,x]_K]+[[c,x],y]$$
+ Logo, podemos escrever a equação
+\begin{center}
+$[[x+a,y+b],z+c]+[[y+b,z+c],x+a]+[[z+c,x+a],y+b]$
+\end{center}
+como a soma das parcelas
+ $$[x,[y,z]_K]_K+[y,[z,x]_K]_K+[z,[x,y]_K]_K$$ 
+ $$ \theta(x,[y,z])+ \theta(y,[z,x])+ \theta(z,[x,y])-[\theta(y,z),x]-[\theta(z,x),y]-[\theta(x,y),z]$$ 
+ $$[a,[y,z]_K]+[b,[z,x]_K]+[c,[x,y]_K]$$ 
+ $$[[a,z],y]-[[a,y],z]+[[b,x],z]-[[b,z],x]+[[c,y],x]-[[c,x],y]$$
+\end{itemize}   
+
+ A primeira parcela é zero pela identidade de Jacobi em $K$; pela definição de cociclo a segunda também é zero; e a soma das duas últimas é zero pois a ação de $K$ em $I$ é definida por uma representação. Portanto, $[x+a,[y+b,z+c]]+[y+b,[z+c,x+a]]+[z+c,[x+a,y+b]]=0$. 
+ 
+ 2) Seja $i:I \to L$ a inclusão e $\pi:L \to K$ a projeção natural. Como $i$ e $\pi$ são morfismos de álgebras de Lie então obtemos a seguinte sequência exata
+  $$0 \to I\stackrel{i}{\to} L \stackrel{\pi}{\to} K \to 0.$$ 
+
+3) Considere a ação de $K$ em $I$ induzida pela representação adjunta de $L$ em $I$: seja $u \in L$ tal que $u+I=x \in K$, então $[a,x]=[a,u], a \in I$. Então $I$ possui estrutura de $K$-módulo e podemos definir os grupos de cohomologia de $K$ em $I$. 
+
+Seja $\pi$ a projeção natural de $L$ em $K$ e $\epsilon:K \to L$ uma aplicação linear injetora satisfazendo  $\pi(\epsilon(x))=x,x \in K$. Observe que pela definição da ação de $K$ em $I$ temos $[a,x]=[a,\epsilon(x)]$ para todo $a \in I$ e $x \in K$.
+
+ Defina a aplicação linear $$\theta(x,y)=[\epsilon(x),\epsilon(y)]_L-\epsilon([x,y]_K) \mbox{ para todo }x,y \in K.$$ Pela construção de $\theta$ temos $\pi(\theta)=0$, ou seja, $\theta(x,y) \in I$. Vamos verificar que $\theta$ é um cociclo de $K$ em $I$. Se $x,y \in K$ é imediato que $\theta(x,y)=-\theta(y,x)$ e $\theta(x,x)=0$. 
+ 
+   Por definição temos $$\theta(x,[y,z])=[\epsilon(x),\epsilon([y,z]_K)]_L-\epsilon([x,[y,z]_K]_K).$$ Somando os três termos $$\theta(x,[y,z])+\theta(y,[z,x])+\theta(z,[x,y])$$ e usando que $\epsilon$ é linear obtemos $$[\epsilon(x),[\epsilon([y,z]_K)]_L+[\epsilon(y),[\epsilon([z,x]_K)]_L+[\epsilon(z),[\epsilon([x,y]_K)]_L.$$ Por outro lado, $$[\theta(x,y),z]_L=[[\epsilon(x),\epsilon(y)]_L-\epsilon([x,y]_K),z]=[[\epsilon(x),\epsilon(y)]_L-\epsilon([x,y]_K),\epsilon(z)].$$ Somando os três termos $$[\theta(x,y),z]_L+[\theta(y,z),x]_L+[\theta(z,x),y]_L$$ obtemos $$[\epsilon(x),[\epsilon([y,z]_K)]_L+[\epsilon(y),[\epsilon([z,x]_K)]_L+[\epsilon(z),[\epsilon([x,y]_K)]_L.$$    
+ 
+   Falta mostrar que $K_\theta$ e $L$ são isomorfos. Como $\epsilon$ é injetora então todo elemento de $u \in L$ pode ser escrito de forma única como $u=\epsilon(u+I)+a$, com $a \in I$. A partir dessa decomposição defina a aplicação linear $\zeta:L \to L_\theta=K \oplus I$ por $$\zeta(u)=(u +I)+a.$$ Sejam $u,v \in L$ tais que $x=\epsilon(u+I)+a$ e $v=\epsilon(v+I)+b$, com $a,b \in I$. Escreva  $$[u,v]=\epsilon([u,v]+I)+c \mbox{ para algum } c \in I.$$ Por outro lado,  $$[u,v]=[\epsilon(u+I)+a,\epsilon(v+I)+b].$$ Desenvolvendo essa última equação obtemos $$[u,v]= [\epsilon(u+I),\epsilon(v+I)]+[a,v+I]-[b,u+I].$$
+   
+ Então $$c= [\epsilon(u+I),\epsilon(v+I)]-\epsilon([u+I,v+I])+[a,v+I]-[b,u+I].$$ Segue que  $$\begin{array}{rcl}
+ \zeta([u,v]) & = &([u,v]+I) + [\epsilon(u+I),\epsilon(v+I)]-\epsilon([u+I,v+I])+[a,v+I]-[b,u+I] \\
+ & = & [(u+I)+a,(v+I)+b] \\
+ & = & [\zeta(u),\zeta(v)].
+ \end{array}$$
+  
+  Suponha que $\zeta(u)=\zeta(v)$ então $a=b$ e $u+I=v+I$. Logo, $$u=\epsilon(u+I)+a=\epsilon(v+I)+b=v.$$ Para cada $y \in L_\theta=K \oplus I$ escreva $y=(u+I)+a$, com $u \in L$ e $a \in I$. Então $\zeta(u+a)=y$.
+  
+   
+   Portanto $L \cong L_\theta$.
+ \begin{flushright}
+ \cqd
+ \end{flushright}
+\section{Derivações de Extensões Usando Cohomologia}
+
+
+\subsection{Pares compatíveis}
+
+\begin{df}{\label{comp}} Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$. Suponha que $d_K \in Der(K)$ e $d_I \in Der(I)$. O par $d_K+d_I \in Der(K)\oplus Der(I)$ é dito par compatível se $$d_I([a,k])=[d_I(a),k]+[a,d_K(k)] \mbox{ para todo } a \in I \mbox{ e } k \in K.$$
+\end{df}
+
+\begin{prop} Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$. O conjunto formando pelos pares compatíveis
+$$\begin{array}{lcl}
+Comp(K,I) & = & \{d_K+d_I \in Der(K) \oplus Der(I) \mid d_I([a,k])=[d_I(a),k]+[a,d_K(k)], \\
+&& \mbox{ para todo } a \in I,k \in K \},
+\end{array}$$ é uma subálgebra de $Der(K) \oplus Der(I)$
+\end{prop}
+
+\prova Sejam $d_K+d_I,e_K+e_I \in Comp(K,I)$, $a \in I$ e $k \in K$. Como o produto em $L$ é linear é imediato verificar que $Comp(K,I)$ é um subespaço de $Der(K)\oplus Der(I)$. 
+
+Usando a definição de par compatível temos $$d_I e_I([a,k])=[d_Ie_I(a),k]+ [e_I(a),d_K(a)]+ [d_I(a),e_K(k)]+[a,d_K.e_K(k)]$$
+e 
+$$e_I d_I([a,k])=[e_Id_I(a),k]+[d_I(a),e_K(a)]+ [e_I(a),d_K(k)]+[a,e_K.d_K(k)].$$
+Então $$[d_I,e_I][a,k]=(d_I e_I - e_Id_I)[a,k]=[[d_I,e_I](a),k]-[a,[d_K,e_K](k)]$$
+
+
+ Segue que $[d_K+d_I,e_K+e_I] \in Comp(K,I)$ .\begin{flushright}
+ \cqd
+\end{flushright}
+
+
+Se a álgebra $I$ é abeliana podemos calcular os pares compatíveis como um anulador de uma ação de $Der(K) \oplus Der(I)$ sobre $Hom(K,Der(I))$. Para isso é necessário primeiro definir uma ação de $\mathfrak{gl}(K) \oplus \mathfrak{gl}(I)$ em $Hom(K,Der(I))$.
+
+ \begin{df}  Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. Sejam $d_K+d_I \in \mathfrak{gl}(K) \oplus \mathfrak{gl}(I)$, $T \in Hom(K,Der(I))$ e $k \in K$. A ação de $\mathfrak{gl}(K) \oplus \mathfrak{gl}(I)$ sobre $Hom(K,Der(I)))$ é dada por  
+ \begin{equation}{\label{acaocomp}}
+ (d_K+d_I)\cdot T(k)=[d_I,T(k)]-T(d_K(k)).
+ \end{equation}
+ \end{df}
+
+ 
+ A aplicação $(d_K+d_I) \cdot T$ é linear pois é uma combinação linear de composições de aplicações lineares. Como $I$ é abeliana  então toda aplicação linear é uma derivação. Logo, $(d_K+d_I) \cdot T(k) \in Hom(K,Der(I))$. Falta verificar a ação do produto de elementos de $\mathfrak{gl}(K) \oplus \mathfrak{gl}(I)$.
+ 
+Sejam $d_K+d_I,e_K+e_I  \in \mathfrak{gl}(K) \oplus \mathfrak{gl}(I) $. Pela definição da ação 
+ 
+$$(e_K+e_I)\cdot T(k)=[e_I,T(k)]-T(e_K(k)),$$ aplicando $(d_K+d_I)$ na equação acima obtemos
+
+$$[d_I,[e_I,T(k)]]-[e_I,T(d_K(k))] -[d_I,T(e_K(k))]+T(e_Kd_K(k)).$$ Analogamente, obtemos que $(e_K+e_I)(d_K+d_I) \cdot T(k) $ é igual à
+$$[e_I,[d_I,T(k)]]-[d_I,T(e_K(k))] -[e_I,T(d_K(k))]+T(d_Ke_K(k)).$$
+
+Subtraindo as duas equações temos 
+
+$$[d_I,[e_I,T(k)]]-[e_I,[d_I,T(k)]]+T(e_Kd_K(k))-T(d_Ke_K(k)).$$
+
+Usando que $T:K \to Der(I)$ é linear e a definção do comutador temos $$[[d_I,e_I],T(k)]]-T([e_K,d_K](k)).$$
+
+Portanto, $[d_K+d_I,e_K+e_I]\cdot T(k)=[[d_I,e_I],T(k)]]-T([e_K,d_K](k)).$
+
+
+
+\begin{teo} Sejam $K$ e $I$ álgebras de Lie  tais que $K$ age sobre $I$ e $I$ é abeliana. Considere a ação definida em ({\ref{acaocomp}}) restrita a álgebra $Der(K) \oplus Der(I)$. Se $T \in Hom(K,Der(I))$ é dada por $T(k)(a)=[a,k]$ então $Comp(K,I)=Ann_{Der(K)\oplus Der(I)}(T)$.
+\end{teo}\prova
+ Sejam $ a\in I$ e $k \in K$ quaisquer. Se $d_K+d_I \in Comp(K,I)$ então $$d_I[a,k]=[d_I(a),k]+[a,d_K(k)].$$ Podemos reescrever essa equação usando $T$: $$d_IT(k)=T(k)d_I(a)+T(d_K(k))(a).$$ Essa igualdade é equivalente à $(d_K+d_I) \cdot T=0$, que é a definição de $Ann_{Der(K)\oplus Der(I)}(T)$.  
+\begin{flushright}
+\cqd
+\end{flushright}
+
+ 
+ \subsection{Pares induzidos}
+ 
+ \begin{df} Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$. Dados $d_K+d_I \in \mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$, $\theta \in C^2(K,I)$ e $h,k \in K$, defina a ação de $\mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$ em $C^2(K,I)$ por \begin{equation}{\label{1}}
+ (d_K+d_I)\cdot \theta(h,k)=d_I(\theta(h,k))-\theta(d_K(k),h)-\theta(k,d_K(h)).
+ \end{equation}
+ \end{df}
+ Omitiremos a demostração que essa ação está bem definida pois ela é semelhante a demonstração que a ação de $\mathfrak{gl}(K)\oplus \mathfrak{gl}(I)$ sobre $Hom(K,Der(I))$ está bem definida. 
+ 
+ 
+\begin{prop} Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. Considere a ação de $Comp(K,I)$ sobre $C^2(K,I)$ definida em ({\ref{1}}). Então os espaços $Z^2(K,I)$ e $B^2(K,I)$ são invariantes por essa ação.
+\end{prop}
+\prova Sejam $k,h,l \in K$ e $\theta \in Z^2(K,I)$. Por definição,
+
+$$(d_K+d_I)\cdot \theta(k,[h,l])=d_I(\theta(k,[h,l]))-\theta(d_K(k),[h,l])-\theta(k,d_K([h,l])).$$ Como $d_K$ é uma derivação temos $$(d_K+d_I)\cdot \theta(k,[h,l])=d_I(\theta(k,[h,l]))-\theta(d_K(k),[h,l])-\theta(k,[d_K(h),l])-\theta(k,[h,d_K(l)]).$$ Então a soma $$(d_K+d_I)\cdot\theta(k,[h,l])+(d_K+d_I) \cdot \theta(h,[l,k])+(d_K+d_I)\cdot\theta(l,[k,h]),$$ pode ser escrita como soma das parcelas
+
+$$d_I(\theta(k,[h,l]))+d_I(\theta(h,[l,k]))+d_I(\theta(l,[k,h]))$$
+$$-\theta(d_K(k),[h,l])-\theta(d_K(h),[l,k])-\theta(d_K(l),[k,h])$$
+$$-\theta(k,[d_K(h),l])-\theta(h,[d_K(l),k])-\theta(l,[d_K(k),h])$$
+$$-\theta(k,[h,d_K(l)])-\theta(h,[l,d_K(k)])-\theta(l,[k,d_K(h)])$$
+Usando a definição de cociclo em cada uma delas obtemos as equações
+$$d_I([\theta(k,h),l])+d_I([\theta(h,l),k])+d_I([\theta(l,k),h])$$
+$$-[\theta(d_K(k),h),l]-[\theta(d_K(h),l),k]-[\theta(d_K(l),k),h]$$
+$$-[\theta(k,d_K(h)),l]-[\theta(h,d_K(l)),k]-[\theta(l,d_K(k)),h]$$
+$$-[\theta(k,h),d_K(l)]-[\theta(h,l),d_K(k)]-[\theta(l,k),d_K(h)]$$
+Como $d_K+d_I$ é um par compatível então podemos substituir na equação acima as igualdades  
+$$d_I([\theta(k,h),l]) = [\d_I\theta(k,h),l])+ [\theta(k,h)),d_K(l)].$$
+$$d_I([\theta(h,l),k]) = [\d_I\theta(h,l),k])+ [\theta(h,l)),d_K(k)].$$
+$$d_I([\theta(l,k),h]) = [\d_I\theta(l,k),h])+ [\theta(l,k)),d_K(h)].$$
+obtendo
+$$[\d_I\theta(k,h),l]+[\d_I\theta(h,l),k]+[\d_I\theta(l,k),h]$$
+$$-[\theta(d_K(k),h),l]-[\theta(d_K(h),l),k]-[\theta(d_K(l),k),h]$$
+$$-[\theta(k,d_K(h)),l]-[\theta(h,d_K(l)),k]-[\theta(l,d_K(k)),h].$$ 
+Que é equivalente à
+$$[(d_K+d_I)\cdot\theta(h,l),k]+[(d_K+d_I)\cdot\theta(l,k),h]+[(d_K+d_I)\cdot\theta(k,h),l].$$
+
+ Então $(d_K+d_I)\cdot\theta \in Z^2(K,I)$.
+ 
+ Agora suponha que $\theta \in B^2(K,I)$. Então existe uma aplicação linear $\nu:K \to I$ tal que $$\theta(k,h)= \nu([k,h])-[\nu(k),h]-[k,\nu(h)]. $$
+ Então
+ 
+ $$(d_K+d_I)\cdot \theta(k,h)=(d_K+d_I)\cdot(\nu([k,h]-[\nu(k),h]-[k,\nu(h)]).$$ Aplicando a definição da ação em cada termo da equação acima obtemos
+$$d_I(\nu([k,h]))-\nu([d_K(k),h])-\nu([k,d_K(h)])$$ 
+$$-d_I([\nu(k),h])+[\nu(d_K(k)),h]+[\nu(k),d_K(h)]$$
+$$-d_I([k,\nu(h)])+[d_K(k),\nu(h)]+[k,\nu(d_K(h))],$$
+podemos usar que $d_K$ é derivação na primeira linha e $d_K+d_I$ é um par compatível nas outras duas para obter
+  $$d_I(\nu([k,h]))-\nu(d_K[k,h])$$ 
+$$-[d_I(\nu(k)),h]-[\nu(k),d_K(h)]+[\nu(d_K(k)),h]+[\nu(k),d_K(h)]$$
+$$-[d_I(k),\nu(h)]-[k,d_I(\nu(h))]+[d_I(k),\nu(h)]+[k,\nu(d_K(h))],$$
+Que é igual a
+  $$(d_I\nu-\nu d_K)[k,h]-[(d_I\nu-\nu d_K)(k),h]-[d_I(k),\nu(h)]+[k,(d_I\nu-\nu d_K)(h)].$$ 
+ Como $(d_I.\nu-\nu.d_K):K \to I$ é uma aplicação linear então $(d_K+d_I)\cdot\theta \in B^2(K,I)$.\begin{flushright}
+ \cqd
+ \end{flushright}
+ 
+  \begin{df}  Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. Seja $\theta \in Z^2(K,I)$ e considere a ação de $Comp(K,I)$ sobre $Z^2(K,I)$ definida em ({\ref{1}}). Defina os pares induzidos de $Comp(K,I)$ por  $$Indu(K,I,\theta)=Ann_{Comp(K,I)}(\theta+B^2(K,I)).$$
+ \end{df}
+ 
+ \subsection{Derivações de $K_\theta$}
+Nessa seção vamos calcular as derivações da extensão $K_\theta$ a partir das derivações de $K$. Para isso é necessário definir um morfismo $\phi$ de $Der(K_\theta)$ em $Der(K) \oplus Der(I)$.
+
+\vspace{0,5cm}
+Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$ com $K=L/I$. Seja $A=\{f \in \mathfrak{gl}(L) \mid f(I) \subset I\}$ a subálgebra de $\mathfrak{gl}(L)$ das aplicações lineares que mantém $I$ invariante. Se $k$ é um elemento de $K$ na forma $k=x+I$ com $x \in L$ e $f \in A$ então podemos definir as aplicações lineares
+\begin{itemize}
+\item $f_K:K \to K $  dada por $f_K(k)=f(x)+I,x \in L$ e
+\item $f_I:I \to I$ como a restrição de $f$ ao ideal $I$.
+\end{itemize}
+Definimos a aplicações linear $\Phi:A \to \mathfrak{gl}(K) \oplus\mathfrak{gl}(I)$ por
+ \begin{equation}{\label{defphi}}
+\Phi(f)=f_K+f_I.
+\end{equation}
+
+\begin{prop}{\label{boadefphi}}Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$. Suponha que $K=L/I$ e $A=\{f \in \mathfrak{gl}(L) \mid f(I) \subset I\}$. Então a aplicação de  $\Phi$ definida em ({\ref{defphi}}) é um morfismo de álgebras de Lie.
+\end{prop}
+\prova Seja $f,g \in A$. Então $$\begin{array}{rcl}
+[\Phi([f,g]) & = & \Phi(fg-gf)\\
+               & = &(fg)_K+(fg)_I-(gf)_K-(gf)_I \\
+               & = & f_Kg_K+f_Ig_I-g_Kf_K-g_If_I\\
+               & = & [f_K,g_K]+[f_I,g_I]\\
+               & = & [f_K+f_I,g_K+g_I]\\
+               & = & [\Phi(f),\Phi(g)].\\
+\end{array} $$\begin{flushright}
+\cqd
+\end{flushright}
+
+\begin{prop}{\label{defphi2}}  Sejam $L$ uma álgebra de Lie e $I$ um ideal de $L$ invarinate por $Der(L)$. Suponha $K=L/I$ e $\Phi$ a aplicação definida ({\ref{defphi}}). Defina $\phi=\Phi|_{Der(L)}$ a restrição de $\Phi$ a $Der(L)$. Então $\phi:Der(L)\to Der(K) \oplus Der(I)$ é um morfismo de álgebras de Lie.
+\end{prop}
+\prova Devido ao resultado obtido na Proposição {\ref{boadefphi}}, basta provarmos que se $d \in Der(L)$ então $d_K+d_I \in Der(K) \oplus  Der(I)$. Sejam $k,h \in L$ então $d_K([\bar{k},\bar{h}])=d([k,h])+I=[d(k),h]+[k,d(h)]+I=[d_K(\bar{k}),\bar{h}]+[\bar{k},d_K(\bar{h})]$. Se $a,b \in I$ então $d_I([a,b])=d([a,b])=[d(a),b]+[a,d(b)]=[d_I(a),b]+[a,d_I(b)]$. \begin{flushright}
+\cqd
+\end{flushright}
+
+Seja $L$ uma álgebra de Lie e $I$ ideal de $L$ com. Denote a restrição da representação adjunta de $L$ a $I$ por $ad_I$. Se $I$ é um ideal abeliano então $I \subset Ker(ad_I)$. Logo, se $K=L/I$ podemos induzir uma representação $ad_K:K \to Der(I)$ dada por $ad_K(x+I)(a)=[a,x]$, para todo $x \in L$ e $a \in I$. Portanto, se $I$ é abeliano então $K$ age sobre $I$.
+
+\begin{teo} Sejam $L$ uma álgebra de Lie e $I$ um ideal abeliano de $L$. Suponha que $K$ age sobre $I$ pela representação $ad_K:K \to Der(I)$. Seja $\phi: Der(L) \to Der(K)\oplus Der(I)$ dada por $\phi(d)=d_K+d_I$, conforme definida na proposição {\ref{defphi2}}. Então $Im(\phi)\leq Comp(K,I).$
+\end{teo}
+\prova Se $d_K+d_I \in Im(\phi)$ então existe $d \in D$ tal que $\phi(d)=d_K+d_I$. Seja $k \in L$ tal que $k+I=\bar{k}$ e $a \in I$, $d_I[a,\bar{k}]= d_I[a,k]=d[a,k]=[d(a),k]+[a,d(k)]=[d_I(a),\bar{k}]+[a,d_K(\bar{k})].$
+\begin{flushright}
+\cqd
+\end{flushright}
+
+  Sejam $K$ e $I$ álgebras de Lie tais que $K$ age sobre $I$ e $I$ é abeliana. Seja $\theta \in H^2(K,I)$ e suponha que $I$ é um ideal de $K_\theta$ invariante por derivações. Sejam $d \in Der(K_\theta)$ e $x+a \in K_\theta$ então $d(x+a)=d(x)+d(a)$. Como $I$ é invariante por derivações então $d(a) \in I$, a restrição de $d$ ao ideal $I$, denotada por $d_I:I \to I$, é uma derivação de $I$. Agora decomponha $d(x)$ em $d_K(x)+\varphi(x)$ com $d_K(x) \in K$ e $\varphi(x) \in I$. Então 
+  \begin{equation}{\label{3}}
+d(x+a)=d_K(x)+\varphi_d(x)+d_I(a).
+\end{equation}
+com $d_K:K \to K$ e $d_I:I \to I$ derivações e $\varphi_d:K \to I$ uma aplicação linear.
+
+
+Podemos verificar que $\varphi_d$ é uma aplicação linear: como $d$ é linear temos $d(k)+d(h)= d_K(k)+d_K(h)+ \varphi_d(k)+\varphi_d(h)$. Por outro lado, $d(k+h)= d_K(k+h)+\varphi_d(k+h),$ então $\varphi_d(k+h)= \varphi_d(k)+\varphi_d(h)$.
+
+ \begin{teo} Seja $K$ uma álgebra de Lie, $I$ um $K$-módulo e $\theta \in Z^2(K,I)$. Seja $L_\theta=K \oplus I$ e considere $I$ como ideal de $L_\theta$. Assuma que $I$ é invariante por $Der(L_\theta)$. Seja $\phi:Der(L_\theta) \to Der(K) \oplus Der(I)$ dada por $\phi(d)=d_K+d_I$. Então:
+ 
+ \begin{enumerate}
+ \item $Im(\phi)=Indu(K,I,\theta)$
+  \item $ker(\phi) \cong Z^1(K,I)$
+  \end{enumerate}
+\end{teo}
+\prova 1) Seja $d_K+d_I \in Indu(K,I,\theta)$ então $(d_K+d_I)\cdot \theta=0$  mod $ B^2(K,I).$ Logo, existe uma aplicação linear $\nu:K \to I$ tal que para todo $k,h \in K$ temos
+
+ \begin{equation}{\label{2}}
+  \theta(d_K(k),h)+\theta(k,d_K(h))+[\nu(k),h]-[\nu(h),k]=d_I(\theta(k,h))+\nu([k,h]).
+\end{equation}
+ Suponha que $x \in K$ e $a \in I$ e defina a aplicação linear $(d_K+d_I)^*:L_\theta  \to  L_\theta$ por $$(d_K+d_I)^*(k+a)=d_K(k)+d_I(a)+\nu(k).$$
+  Vamos verificar que $(d_K+d_I)^*$ é uma derivação de $L_\theta$. Sejam $k+a,h+b \in L_\theta$.
+ $$\begin{array}{rcl}
+(d_K+d_I)^*([k+a,h+b]) & = & (d_K+d_I)^*([k,h]_K+\theta(k,h)+[a,h]-[b,k])\\
+                       & = & d_K([k,h]_K)+d_I(\theta(k,h))+d_I([a,h])-d_I([b,k])+ \nu([k,h])\\
+                       & = & d_K([k,h]_K)+d_I(\theta(k,h))+\nu([k,h]) \\
+                       & + &[d_I(a),h])+[a,d_K(h)]-[d_I(b),k]-[b,d_K(k)]\\\end{array}$$
+
+
+$[(d_K+d_I)^*(k+a),h+b]+[k+a,(d_K+d_I)^*(h+b)])$
+
+\begin{flushright}
+$\begin{array}{rcl}
+ & = & (d_K+d_I)^*([k,h]_K+\theta(k,h)+[a,h]-[b,k])\\
+ & = &  [d_K(k)+d_I(a)+\nu(k),h+b]+[k+a,d_K(h)+d_I(b)+\nu(h)]\\
+ & = & [d_k(k),h]_K+\theta(d_K(k),h)+[d_I(a)+\nu(k),h]-[b,d_K(k)] \\
+ & + & [k,d_K(h)]_K+\theta(k,d_K(h))+[a,d_K(h)]-[d_I(b)+\nu(h),k]\\
+ & = & d_K([k,h]_K)+ \theta(d_K(k),h)+\theta(k,d_K(h))+[\nu(k),h]+[k,\nu(h)]\\
+ & + &[d_I(a),h])+[a,d_K(h)]-[d_I(b),k]-[b,d_K(k)]
+ \end{array}$
+\end{flushright}
+
+Pela equação ({\ref{2}}) obtemos a igualdade. Logo $(d_K+d_I)^*$ é uma derivação. Além disso, $(d_K+d_I)^*_K(x+a)=d_K(x)+d_I(a)+\nu(x)+I=d_K(x)+I$. E $(d_K+d_I)^*_I(a)=d_I(a)$. Segue que $\phi((d_K+d_I)^*)=d_K+d_I.$
+ 
+ Agora, suponha que $(d_K+d_I) \in Im(\phi)$. Então existe $d \in Der(L_\theta)$ tal que $\phi(d)=(d_K+d_I)$. Para cada $k+a \in L_\theta$ escreva $d(k+a)=d_K(k)+\varphi_d(k)+d_I(a)$, conforme a equação ({\ref{3}}). Como $d$ é uma derivação, temos $d[k+a,h+b]=[d(k)+a,h+b]=[k+a,d(h)+b]$. Expandindo os dois da igualdade:
+ $$\begin{array}{rcl}
+ [d(k+a),h+b]+[k+a,d(h+b)]& = &[d_K(k)+\varphi_d(k)+d_I(a),h+b]\\
+ & + & [k+a,d_K(h)+\varphi_d(h)+d_I(b)]\\
+ & = &  [d_K(k),h]_K+\theta(d_K(k),h)+[\varphi_d(k)+d_I(a),h]-[b,d_K(k)]\\
+ & + & [k,d_K(h)]_K+\theta(k,d_K(h))+[a,d_K(h)]-[\varphi_d(h)+d_I(h),k] \\
+ & = & d_K([k,h]_K)+\theta(d_K(k),h)+\theta(k,d_k(h))\\
+ & + & [d_I(a),h]-[b,d_k(k)]+[a,d_K(h)]\\
+ & - & [d_I(b),k] +[\varphi_d(k),b]-[\varphi_d(h),k] \\
+ \end{array}$$
+ $$\begin{array}{rcl}
+d([k+a,h+b]) & = & d([k,h]_K+\theta(k,h)+[a,h]-[b,k])\\
+ & = &  d_K([k,h]_K)+d_I(\theta(k,h))+d_I([a,h])-d_I([b,k])+\varphi_d([k,h])\\
+ \end{array}$$
+ 
+ Como $Im(\phi) \subseteq Comp(K,I)$ então $\phi(d)=(d_K+d_I) \in Indu(K,I,\theta)$.
+ 
+ \vspace{0,5cm}  
+
+ 2) Se $d \in ker(\phi)$ então $d(k+a)=\varphi_d(k)$. Assim, a igualdade $d[k+a,h+b]=[d(k)+a,h+b]=[k+a,d(h)+b]$ nos fornece $\varphi_d([k,h]_K)=[\varphi_d(k),h]-[\varphi_d(h),k]$ ou seja, $\varphi_d \in Z^2(K,I)$.
+ 
+ Defina $\sigma:ker(\phi) \to (Z^1(K,I),+)$ por $\sigma(d)=\varphi_d$.Sejam $d,e \in ker(\phi)$ e $k \in K$ então $\sigma(d+e)(k)=\varphi_{(d+e)}(k)=(d+e)(k)=(d)(k)+(d)(k)=\varphi_d(k)+\varphi_e(k)=(\sigma(d)+\sigma(e))(k).$
+
+ Agora defina $\delta: (Z^1(K,I),+) \to ker(\phi)$ por $\delta(\varphi)=d_{\varphi}$ tal que $d_\varphi(k+a)=\varphi(k)$. Temos, 
+ $d_\varphi([k+a,h+k])=\varphi([k,h])=[\varphi(k),h]+[k,\varphi(h)]=[d_\varphi(k+a),h+b]+[k+a,d_\varphi(h+b)]$. Logo, $d_\varphi$ é uma derivação de $L_\theta$ e $d_\varphi \in ker(\phi)$. Sejam $\varphi,\beta \in (Z^1(K,I),+)$ e $k \in K$ então $\delta(\varphi+\beta)(k)=d_{\varphi+\beta}(k)=\varphi(k)+\beta(k)=(\delta(\varphi)+\delta(\beta))(k).$
+ 
+ É imediato que $\sigma=\delta^{-1}.$ 
+ \begin{flushright}
+ \cqd
+ \end{flushright}
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Extensões Centrais via Cohomologia}
+
+Apresentaremos como definir uma extensão central de $K$ a partir de subespaços de $H^2(K,\F)$ e calcularemos as classes de isomorfismos dessas extensões. 
+
+ \subsection{Extensões a partir de espaços de $H^2(K,\F)$}
+ Sejam $K$ uma álgebra de Lie sobre um corpo $\F$. Como $\F$ pode ser visto como um $K$-módulo com ação trivial então podemos definir o segundo grupo de cohomologia de $Z^2(K,\F)$. 
+ 
+  Sejam $\theta_1, \cdots, \theta_s \in Z^2(K,\F)$ e $I$ um espaço vetorial com base $\{e_1,\cdots,e_s\}$. Denote por $U$ o espaço gerado sobre $\F$ por $\theta_1, \cdots, \theta_s$ e defina a álgebra $K_U$ como o espaço vetorial $K \oplus I$ com o produto   
+\begin{equation}{\label{K_U}}
+ [x+a,y+b]_U=[x,y]_K+ \sum_{i=1}^{s} \theta_i(x,y)e_i \mbox{ para } x,y\in K \mbox{ e } a,b \in I.
+\end{equation}
+Utilizaremos o subíndice $K$ para denotar o produto de elementos de $K$.
+
+\vspace{0,5cm}
+Vamos verificar que $K_U$ é uma álgebra de Lie.
+
+
+
+O próximo resultado nos permitirá definir a álgebra $K_U$ a partir de elementos de $H^2(K,\F)$.
+
+
+% \begin{prop} $K_U$ definido em ({\ref{K_U}}) é uma álgebra de Lie e o tipo de isomorfismo independe da base de $I$ escolhida.
+% \end{prop} 
+%
+%\noindent \textit{Prova:}  
+%
+
+
+%A identidade de Jacobi segue de 
+%
+%$\begin{array}{rcl}
+%&&[[x+u,y+w]_U,z+t]_U+[[y+w,z+t]_U,x+u]_U+[[z+t,x+u]_U,y+w]_U \\
+%&=&[[x,y]_K,z+t]_K+[[y,z]_K,x]_K+[[z,x]_K,y]_K\\
+%&+&\sum_{i=1}^s (\theta_i([x,y]_K,z)+ \theta_i([y,z]_K,x)+\theta_i([z,x]_K,y))v_i \\
+%&=&0.
+%\end{array}$
+%
+%Sejam $\{v_1, \cdots , v_s\}$ e $\{e_1, \cdots , e_s\}$ bases de $I$ e $\beta:I \to I$ dada por $\beta(v_i)=e_i$. Seja $K_U$ a álgebra de Lie associada à $\{v_1, \cdots , v_s\}$ e $\bar{K}_U$ associada à $\{e_1, \cdots , e_s\}$. Defina $\Phi:K_U \to \bar{K}_U$ por $\Phi(x+u)=x+\beta(u)$, com $x \in K$ e $u \in V$. $\Phi$ é um morfismo de álgebras de Lie pois
+%
+%$\begin{array}{rcl}
+%[\Phi(x+u,y+w)]_U &= &[x+\beta(u),y+\beta(w)]_U \\
+%&=&[x,y]_K+ \sum_{i=1}^{s} \theta_i(x,y)e_i \\
+%&=& [x,y]_K+\sum_{i=1}^{s} \theta_i(x,y)\beta(v_i) \\
+%&=&\Phi([x,y]_K+ \sum_{i=1}^{s} \theta_i(x,y)v_i)\\
+%&=& \Phi([x+u,y+w]_U).
+%\end{array}$
+%
+%Analogamente, a aplicação linear $\bar{\Phi}:\bar{K}_U \to K_U$ dada por $\bar{\Phi}(x+u)=x+\beta^{-1}(u), x \in K$ e $u \in I$ é um morfismo de álgebras de Lie e $\bar{\Phi}=\Phi^{-1}$. \cqd
+ 
+\begin{prop} Sejam $\theta_1,...,\theta_s,\zeta_1,...,\zeta_s \in Z^2(L,\F)$ tais que $\theta_i -\zeta_i \in B^2(K,\F)$ para $1 \leq i \leq s$. Se $U$ e $V$ são os subespaços vetoriais gerados por $\theta_i$ e $\zeta_i$, respectivamente, então $K_U$ é isomorfo a $K_V$.
+\end{prop} 
+\noindent \textit{Prova:} Sejam $\nu_1, \cdots, \nu_s$ funcionais lineares em $K$ tais que $\theta_i(x,y)=\zeta_i(x,y)+\nu_i([x,y]),$ para $1 \leq i \leq s$. Seja $I$ um espaço vetorial com base $\{e_1, \cdots, e_s\}$. Então como espaços vetorias temos a igualdade $K_U = K\oplus I = K_V$. Defina a aplicação linear $\sigma:K_U \to K_V$ por $$\sigma(x+a)= x + a + \sum_{i=1}^{s} \nu_i(x)e_i, \hspace{0,5cm} x \in K,a \in I.$$ Sejam $x,y \in K$ e $a,b \in I$, então
+
+$\begin{array}{rcl}
+\sigma([x+a,y+b]_U) & = & \sigma([x,y]_K+\sum_{i=1}^{s} \theta_i(x,y)e_i) \\
+& = & [x,y]_K+\sum_{i=1}^{s} \theta_i(x,y)e_i+ \sum_{i=1}^{s} \nu_i([x,y]_K)e_i \\
+& = & [x,y]_K+\sum_{i=1}^{s} (\theta_i+\nu_i)([x,y]_K)e_i \\
+& = & [x+a,y+b]_V. \\
+\end{array}$
+
+Logo, $\sigma$ é um morfismo de álgebras de Lie. Se $\sigma(x+a)=0$ então $x=0$ pois a soma de $K$ e $I$ é direta. Isso implica que $ \sum_{i=1}^{s} \nu_i(x)e_i=0$ e, consequentemente, $a=0$. Como $\sigma$ é um endomorfismo injetor de $K \oplus I$ então $\sigma$ é um isomorfismo.
+\begin{flushright}
+\cqd
+\end{flushright}
+
+\begin{prop} Seja $L$ uma álgebra de Lie sobre o corpo $\F$ com centro não trivial. Suponha que o centro de $L$ tenha dimensão $s$. Então existem uma álgebra de Lie $K$ e cociclos $\theta_1,\cdots, \theta_s \in Z^2(K,\F)$ tais que, se $U$ é o subespaço gerado por $\theta_1+B^2(K,\F),\cdots, \theta_s+B^2(K,\F)$ em $H^2(K,\F)$, então $L \cong K_U$. 
+\end{prop}
+\noindent \textit{Prova:} Sejam $I=Z(L)$ e $K=L/I$. Considere a ação de $K$ em $I$ induzida pela representação adjunta. Como $I$ é central então a ação é trivial. Seja $\pi:L \to K$ a projeção. Escolha uma aplicação linear $\sigma:K \to L$ satisfazendo $\pi(\sigma(x))=x$ para todo $x \in K$.
+
+ Defina $\theta : K \times K \to I$ por $\theta(x,y)=[\sigma(x),\sigma(y)]_L-\sigma([x,y]_K)$. Vamos verificar que $\theta$ é um cociclo em $H^2(K,I)$. Sejam $x,y,z \in K$.
+ 
+ \begin{itemize} 
+ \item $\theta(x,y)=[\sigma(x),\sigma(y)]_L-\sigma([x,y]_K)=-[\sigma(y),\sigma(x)]_L-\sigma([y,x]_K)=\theta(y,x)$;
+ \item $\theta(x,x)=[\sigma(x),\sigma(x)]_L-\sigma([x,x]_K)=0$;
+ \item $\theta([x,y]_K,z)=[\sigma([x,y]_K),\sigma(y)]_L-\sigma([[x,y]_K,z]_K)$
+ \end{itemize}
+ 
+\vspace{0,5cm}
+
+\subsection{Centro de $K_U$}
+
+%Usando o centro de $L$ e o conceito de radical de uma forma alternada podemos calcular o centro de $L_U$.
+
+\vspace{0,5cm}
+
+\begin{df} Seja $\theta \in Z^2(K,\F)$. O radical de $\theta$ é definido pelo conjunto $$\theta^{\perp}=\{x \in K \mbox{ tal que } \theta(x,y)=0, \forall y \in K\}.$$ Se $S$  é um subconjunto de $Z^2(K,\F)$ então o radical de $S$ é definido por $S^{\perp}=\cap_{\theta \in S}\theta^{\perp}.$
+\end{df}
+
+
+
+\begin{prop}{{\label{ort}}} Seja $S$ um subconjunto de $Z^2(K,\F)$. Então,
+
+a) O radical de $S$ é uma subálgebra de $L$.
+
+b) O radical de $S$ é igual ao radical do subespaço gerado por $S$.
+
+c) Sejam $\theta_1,\theta_2 \in Z^2(K,\F)$ tais que $\theta_1-\theta_2 \in B^2(K,\F)$. Então $\theta_1^\perp \cap Z(K)=\theta_2^\perp \cap Z(K)$. 
+\end{prop}
+
+\noindent \textit{Prova:} a) Sejam $\theta \in S$, $x,z \in S^{\perp}$ e $y \in K$. Pela definição de cociclo temos $$\theta([x,z],y)=-\theta([z,y],x)-\theta([y,x],z)=0.$$ Segue que $\theta^{\perp}$ é uma subálgebra de $K$ e, consequentemente, $S^{\perp}$ é uma interseção de subálgebras.  
+
+b) Sejam  $x \in S^\perp$, $y \in K$ e $\theta$ no subespaço gerado por $S$. Então $\theta=\sum_{i=1}^{n}a_i \theta_i$ para $a_i \in \F$ e $\theta_i \in S$. Segue que, $$\theta(x,y)=\sum_{i=1}^{n}a_i \theta_i(x,y)=0.$$ Se $x$  está no radical do subespaço gerado por $S$ então $x \in \theta^\perp$ para cada $\theta \in S$, ou seja, $x \in S^\perp$.	
+
+c) Seja $\nu:K \to \F$ um funcional linear tal que $(\theta_1-\theta_2)(x,y)=\nu([x,y])$. Se $x \in Z(K)$ então  $$\theta_1(x,y)=\theta_2(x,y), y \in K.$$   Em particular, $x$ está no radical de $\theta_1$ se, e somente se, está no radical de $\theta_2$. 
+\begin{flushright}
+\cqd
+\end{flushright}
+
+\begin{prop} Sejam $\bar{\theta}_1, \cdots, \bar{\theta}_s \in H^2(K,\F)$ e $U$ o subespaço gerado por $\bar{\theta}_1, \cdots, \bar{\theta}_s$. Então o centro de $K_U$ é dado por $$Z(K_U)=(U^\perp \cap Z(K))+I.$$
+\end{prop}
+\noindent\textit{Prova:} 
+Sejam $\theta_1, \cdots, \theta_s \in Z^2(K,\F)$ tais que $\bar{\theta}_i=\theta_i+B^2(K,\F)$ para $1 \leq i \leq s$. Seja $V$ o subespaço  de $Z^2(K,\F)$ gerado pelos $\theta_i$.  \begin{itemize}
+\item Se $x \in V^\perp \cap Z(K)$ e $a \in K$ então $[x+a,y+b]_V=[x,y]_K+\sum_{i=1}^s\theta_i(x,y)e_i=0,$ para quaisquer $y \in K$ e $b \in I$. Logo, $x+a \in Z(K_V)$. 
+
+\item Seja $x+a \in Z(K_V)$ então $[x,y]_L +\sum_{i=1}^s\theta_i(x,y)e_i,$ para todo $y \in K$ e $b \in I$. Como a soma de $K$ e $I$ é direta então $[x,y]_K=0$ e $\theta_i(x,y)=0$. Segue que $x \in Z(K) \cap V^\perp$.
+\end{itemize}
+Portanto,  $Z(K_V)=(V^\perp \cap Z(K))+I.$  Usando Proposição \ref{ort} item c), podemos extender o resultado para o subespaço $U$ de $H^2(L,\F)$.  	
+\begin{flushright}
+\cqd
+\end{flushright}
+
+\vspace{0,5cm}
+
+\subsection{ Ação de $Aut(L)$ em $H^2(L,\F)$}
+
+ Sejam $\phi \in Aut(L)$ e $\theta \in H^2(L,\F)$. Defina a ação de $Aut(L)$ em $H^2(L,\F)$  por $\phi . \theta (x,y)=\theta(\phi(x), \phi(y))$. Se $\nu:L \to V$ é uma aplicação linear então $\phi.\nu([x,y])=\nu([\phi(x),\phi(y)])=\nu(\phi([x,y]))$ e $ \phi . \nu \in B^2(L,\F)$, ou seja, a ação está bem definida em $H^2(L,\F)$. 
+
+\begin{af} Sejam $U=<\bar{\theta}_1, ...,\bar{\theta}_s>$ e $W=<\bar{\eta}_1, ...,\bar{\eta}_s>$ subespaços de $H^2(L,\F)$ tais que $U^\perp \cap Z(L)=W^\perp\cap Z(L)$. Então $L_U \cong L_W$ se, e somente se, existe $\phi \in Aut(L)$ tal que $U=<\phi.\bar{\eta}_1, ...,\phi.\bar{\eta}_s>$.  
+\end{af} 
+
+\noindent\textit{Prova:} \textcolor{red}{ Lema 3 do artigo}	
+\begin{cor} O tipo de isomorfismo de $L_U$ independe da base de $U$ escolhida.
+\end{cor}
+
+\begin{af} Seja $U=<\bar{\theta}_1, ...,\bar{\theta}_s>$ subespaço de $H^2(L,\F)$ tal que $U^\perp\cap Z(L)=0$. Então $L_U$ não possuiu componente central se, e somente se, $\{\bar{\theta}_1, ...,\bar{\theta}_s\}$ são linearmente independentes.
+\end{af}
+\noindent\textit{Prova:} \textcolor{red}{ Lema 4 do artigo}	
+
+
+\begin{df} Um subespaço $U$ de $H^2(L,\F)$ é dito \textbf{permissível} se $U^\perp\cap Z(L)=0$. 
+\end{df}
+
+\begin{af}{{\label{per}}} Sejam $U=<\bar{\theta}_1, ...,\bar{\theta}_s>$ um subespaço permissível de $H^2(L,\F)$, $L_U=L\oplus V$ e $\{v_1,...,v_s\}$ uma base de $V$. Então $V=\{\sum_{i=1}^s\theta_i(x,y)v_i, x,y \in L\}$.
+\end{af}
+\noindent\textit{Prova:} Suponha que exista $z \in V-\{\sum_{i=1}^s\theta_i(x,y)v_i, x,y \in L\}$. Então $z \notin L_U'$ com $z \in Z(L_u)$. Logo, $<y>$ é uma componente central de $L_U$. O que não acontece pois $U$ é permissível.
+
+\vspace{0,5cm}
+
+\noindent\textit{Resumo: Seja $U$ um espaço permissível de dimensão $s$ e $V$ um espaço vetorial de dimensão $s$. Sejam $\{\theta_1,...,\theta_s\}$, $\{v_1,...,v_s\}$ bases de $U$ e $V$, respectivamente. Então $L_U=L \oplus V$ com a operação $[x+u,y+w]_U=[x,y]_L+ \sum_{i=1}^{s} \theta_i(x,y)v_i \mbox{ para } x,y\in L \mbox{ e } u,w \in V $ é uma álgebra de Lie de dimensão $dim(L)+s$ que não possui componente central.}
+
+\section{ Automorfismos de $L_U$}
+
+\subsection{Levantamento de $(Aut(L))_U$ para $Aut(L_u)$ }
+
+Seja $U=<\bar{\theta}_1, ...,\bar{\theta}_s>$ um espaço permissível de $H^2(L,\F)$ e $(Aut(L))_U$ o estabilizador de $U$ sob a ação de $Aut(L)$. Usando a afirmação \ref{per} podemos escrever os elementos de $V$ da forma $u=(\sum_{i=1}^s\theta_i(x,y)v_i),$ com $ x,y \in L$. Para cada $\alpha \in (Aut(L))_U$ defina $\alpha^*:L_U \to L_U$ por $\alpha^*(x+u)=\alpha(x)+ \sum_{i=1}^s(\alpha.\theta_i)(x,y)v_i=\alpha(x)+ \sum_{i=1}^s\theta_i(\alpha(x),\alpha(y))v_i$.
+
+\begin{af} $\alpha^*$ está bem definida e $\alpha^* \in Aut(L_U)$
+\end{af}
+
+\noindent\textit{Prova:} Suponha que $u=\sum_{i=1}^s\theta_i(a,b)v_i=\sum_{i=1}^s\beta_iv_i$, com $\beta_i \in \F$. Como  $\alpha \in (Aut(L))_U$ então $\alpha.\theta_i=\sum_{j=1}^s\lambda_{ij}\theta_j$. Assim,
+
+- $\alpha^*(x+u)=\alpha(x)+ \sum_{i=1}^s(\alpha.\theta_i)(a,b)v_i$
+
+\hspace{2cm}$=\alpha(x)+ \sum_{i=1}^s(\sum_{j=1}^s\lambda_{ij}\theta_j)(a,b)v_i$
+
+\hspace{2cm}$=\alpha(x)+ \sum_{i=1}^s(\sum_{j=1}^s\lambda_{ij}\theta_j(a,b))v_i$
+
+\hspace{2cm}$=\alpha(x)+ \sum_{i=1}^s(\sum_{j=1}^s\lambda_{ij}\beta_j)v_i$, \hspace{1cm} \textit{(que depende somente de $x+u$).}
+
+Para checar que $\alpha^*$ é um $L$-homomorfismo considere $x,y \in L$ e $u,w \in V$ tais que \\
+$u=\sum_{i=1}^s\theta_i(x_1,x_2)v_i$ e $w=\sum_{i=1}^s\theta_i(y_1,y_2)v_i$ .
+
+- $[\alpha^*(x+u),\alpha^*(y+w)]=[\alpha(x)+\sum_{i=1}^s\alpha.\theta_i(x_1,x_2)v_i,\alpha(y)+\sum_{i=1}^s\alpha.\theta_i(y_1,y_2)v_i]$ 
+
+\hspace{3,9cm} $=[\alpha(x),\alpha(y)]_L+ \sum_{i=1}^s \theta_i(\alpha(x),\alpha(y))v_i$
+
+\hspace{3,9cm} $=[\alpha(x),\alpha(y)]_L+ \sum_{i=1}^s \alpha.\theta_i(x,y)v_i$
+
+- $\alpha^*([x+u,y+w])= \alpha^*([x,y])$
+
+\hspace{3,2cm} $=\alpha^*([x,y]_L+\sum_{i=1}^s\theta_i(x,y)v_i)$
+
+\hspace{3,3cm}$=\alpha[x,y]_L+\sum_{i=1}^s\alpha.\theta_i(x,y)v_i$
+
+\hspace{3,3cm}$=[\alpha(x),\alpha(y)]_L+ \sum_{i=1}^s\alpha.\theta_i(x,y)v_i.$
+
+ - $\alpha^*$ é um isomorfismo pois $(\alpha^*)^{-1}=(\alpha^{-1})^*$ \cqd
+ 
+\subsection{Descrição de $L_U$}
+ 
+ Se $\tau \in Aut(L_U)$ então $\tau(V) \subseteq V$, pois $V$ é o centro de $L_U$. Então $\tau_V$, a restrição de $\tau$ à $V$ é um automorfismo de $V$. 
+ 
+ Se $x \in L$ então $\tau(x)$ pode ser escrito como $\tau_L(x)+\varphi_{\tau}(x)$, com $\tau_L(x) \in L$ e $\varphi_{\tau}(x) \in V$ . 
+ 
+ Assim $\tau(x+u)= \tau(x)+\tau(u)=\tau_L(x)+\varphi_{\tau}(x)+\tau_V(u)$. Isso nos permite definir duas aplicações $\tau_L:L \to L$ e $\varphi_{\tau}:L \to V$. 
+
+
+\begin{af} Sejam $\tau \in Aut(L_U)$ e $\tau_L$, $\varphi_{\tau}$ como definidas acima, então:
+
+a) $\tau_L \in Aut(L)$; 
+
+b) $\varphi_{\tau}$ é uma aplicação linear; 
+
+c) $\Psi:Aut(L_U) \to Aut(L)$ é um homomorfismo
+
+\end{af}
+
+\noindent\textit{Prova:} Sejam $x,y \in L$. Então
+
+$\begin{array}{rcl}
+\tau_L(x+y)+\varphi_{\tau}(x+y) & = & \tau(x+y) \\
+& = & \tau(x)+\tau(y) \\
+ & = & \tau_L(x)+\varphi_{\tau}(x)+ \tau_L(y)+ \varphi_{\tau}(y)
+\end{array}$
+
+Logo, $\tau_L(x+y)=\tau_L(x)+\tau_L(y)$ e $\varphi_{\tau}(x+y)=\varphi(x)+\varphi_{\tau}(y)$. Verificando que $\varphi_{\tau}$ e $\tau_L$ são aplicações lineares. 
+
+$\tau$ é um automorfismo de $L_U$ então temos a igualdade $[\tau(x),\tau(y)]_U = \tau([x,y]_U)$. Desenvolvendo ambos os lados:  
+
+$\begin{array}{rcl}
+[\tau(x),\tau(y)]_U & = & [\tau_L(x)+\varphi_{\tau}(x),\tau_L(y)+\varphi_{\tau}(y)]_U \\
+ & = & [\tau_L(x),\tau_L(y)]_U \\
+ & = & [\tau_L(x),\tau_L(y)]_L + \sum_{i=1}^s \theta_i(x,y)v_i
+\end{array}$
+
+$\begin{array}{rcl}
+\tau([x,y]_U) & = & \tau ([x,y]_L + \sum_{i=1}^s \theta_i(x,y)v_i)\\
+ & = & \tau_L([x,y]_L)+\varphi_{\tau}([x,y]_L)+\tau_V(\sum_{i=1}^s \theta_i(x,y)v_i)) 
+
+\end{array}$
+
+ Então $\tau_L([x,y]_L)=[\tau_L(x),\tau_L(y)]_L$.
+
+Para concluirmos que $\tau_L$ é um automorfismos podemos exibir sua  inversa: 
+
+$x=\tau \tau^{-1}(x)=\tau^{-1}(\tau_L(x)+\varphi_{\tau}(x))=\tau^{-1}_L\tau_L(x) + \tau^{-1}_V(\varphi_{\tau}(x))+\tau^{-1}(\varphi_{\tau}(x))$. Como $\tau^{-1}$ é um automorfismo e $\varphi_{\tau}(x) \in V$ temos $\tau^{-1}_L\tau_L(x)=x$.  
+
+  
+
+c) $\tau \sigma (x+u)=\tau (\sigma_L(x)+ \varphi_{\sigma}(x)+\tau_V(u))=\tau_L(\sigma_L(x))+\varphi_\tau(\sigma_L(x))+\tau_V( \varphi_{\sigma}(x)+\sigma_V(u))$. Então $\Psi(\tau\sigma)=\Psi(\tau)\Psi(\sigma)$\cqd
+
+\vspace{0,5cm}
+
+
+
+\begin{af} $Img(\Psi) \cong (Aut(L))_U$
+\end{af}
+
+\noindent\textit{Prova:} Se $\alpha \in (Aut(L))_U$ então $\alpha^* \in Aut(L_U)$ e $\Psi(\alpha^*)=\alpha$.Logo, $\alpha \in Img(\Psi)$.
+
+Seja $\alpha \in Img(\Psi)$ então existe $\tau \in Aut(L_U)$ tal que $\tau_L=\alpha$. Desenvolvendo a equação $\tau([x+u,y+w]_U)=[\tau(x+u),\tau(y+w)]_U$: 
+
+$\begin{array}{rcl}
+
+\tau([x+u,y+w]_U) & = & \tau([x,y]_L+ \sum_{i=1}^s \theta_i(x,y)v_i) \\
+                  & = & \tau_L([x,y]_L)+\varphi_{\tau}([x,y]_L)+\sum_{i=1}^s\theta_i(x,y)\tau_V(v_i)\\
+\end{array}$
+
+$\begin{array}{rcl}
+[\tau(x+u),\tau(y+w)]_U & = &[\tau_L(x)+\varphi_{\tau}(x)+\tau_V(u),\tau_L(y)+\varphi_{\tau}(y)+\tau_V(w)]_U \\
+                        & = & [\tau_L(x),\tau_L(y)]_L+\sum_{i=1}^s \theta_i(\tau_L(x),\tau_L(y))v_i\\
+                       & = & [\tau_L(x),\tau_L(y)]_L+\sum_{i=1}^s (\tau_L.\theta_i)(x,y)v_i\\
+\end{array}$
+
+Se escrevermos $\tau_V(v_i)=\sum_{j=1}^s \lambda_{ij}v_j, \lambda_{ij} \in \F$ teremos $\tau_L.\theta_k=\sum_{t=1}^s\lambda_{tk}\theta_k$ em $H^2(L,\F)$ e $\tau_L \in (Aut(L))_U$\cqd
+
+\begin{lem}{{\label{fix}}} Seja $X=\{x_1,...,x_d\}$ um conjunto mínimo de geradores de $L$ como álgebra de Lie\textbf{ nilpotente}  e $\tau, \sigma \in ker(\Psi)$. Então $\sigma_V(\varphi_{\tau}(x_i))=x_i, 1 \leq i \leq d.$ 
+\end{lem}
+\noindent\textit{Prova:}  Se $\sigma \in ker(\Psi) $ então $\sigma $ fixa $[x_i,x_j]_U$: $\sigma([x_i,x_j]_U)=[\sigma(x_i),\sigma(x_j)]=[x_i+\varphi_{\sigma(x_i)},x_j+\varphi_{\sigma(x_j)}]=[x_i,x_j]_U$. Como $\varphi_{\sigma}(x_i) \in V$ então $\varphi_{\sigma}(x_i)=\sum [x_{i_1},...,.x_{i_t}]$ é fixo por $\sigma$ e, em particular, por $\sigma_V$. 
+
+\begin{af} Seja $X=\{x_1,...,x_d\}$ um conjunto mínimo de geradores de $L$  como álgebra de Lie. Então $ker(\Psi) \cong Hom(\mathcal{X},V)$, $Hom(\mathcal{X},V)$ considerado como grupo abeliano, com $\mathcal{X}$ sendo o espaço gerado por $X$. 
+\end{af}
+
+\noindent\textit{Prova:} Defina $\Phi: ker(\Psi) \to Hom(X,V)$ por $\Phi(\tau)=\varphi_{\tau}$. Se $\sigma, \tau \in Aut(L_U)$, então
+ $\sigma \tau (x_j)=\sigma(x_j+\varphi_{\tau}(x_i))=x_j+\varphi_{\sigma}(x_j)+\sigma_V(\varphi_{\tau}(x_j))\stackrel{Lema \ref{fix}}{=} x_j+\varphi_{\sigma}(x_j)+\varphi_{\tau}(x_j)$.	 
+
+Se $\Phi(\tau)=0$ então $\tau(x)=x, \forall x \in L$ e $\tau=Id_{L}.$ Sejam $\phi_{ij}:X \to V$ dada por  $\phi_{ij}(x_i)=v_j$ e $\phi_ij(x_k)=0$ se $i \neq k$, e $\beta \in \F$ um elemento primitivo. Então $Hom(X,V)_{\F}=<\beta^k\phi_{ij}, 1 \leq k \leq p-1, 1 \leq i \leq d, 1 \leq j \leq s>$. Defina $\tau_{ij}^k:L_U \to L_U$ por $\tau_{ij}^k(x_i)=x_i+\beta^kv_j$ e $\tau_{ij}^k(x_t)=x_t$. $\Phi(\tau_{ij}^k(x_t)=\beta^k \phi_{ij}$. Portanto $\Phi$ é bijetora.
+
+\begin{cor} $ker(\Psi)$ é gerado por $\tau_{ij}^k$.
+\end{cor}
+
+
+
+\end{document}
